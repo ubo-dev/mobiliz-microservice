@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/../registry-service/pom.xml" />
         <option value="$PROJECT_DIR$/../grouping-service/pom.xml" />
+        <option value="$PROJECT_DIR$/../eureka-naming-server/pom.xml" />
+        <option value="$PROJECT_DIR$/../api-gateway/pom.xml" />
       </list>
     </option>
   </component>
