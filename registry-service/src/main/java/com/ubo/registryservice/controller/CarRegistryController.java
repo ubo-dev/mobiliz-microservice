@@ -64,5 +64,8 @@ public class CarRegistryController {
     }
 
 
-
+    @GetMapping("/registriesReg/{id}")
+    public CarRegistry getRegistryByIdRegular(@PathVariable Integer id){
+        return carRegistryService.getCarRegistryById(id);
+    }
 }

@@ -1,8 +1,10 @@
 package com.ubo.groupingservice.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class CarRegistry {
+public class CarRegistry implements Serializable {
 
     @Id
     private Integer id;
@@ -24,5 +26,14 @@ public class CarRegistry {
     private String model;
 
     private Integer modelYear;
+
+    @ManyToMany(mappedBy = "carRegistries", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Group> groupList;
+
+    @ManyToMany(mappedBy = "carRegistries", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Courier> couriers;
+
+    @ManyToMany(mappedBy = "carRegistries", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<Fleet> fleets;
 
 }

@@ -15,18 +15,14 @@ public class CarRegistry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "sase_no")
     private Integer vin;
 
-    @Column(name = "plaka")
     private String plate;
 
-    @Column(name = "marka")
     private String brand;
 
     private String model;
 
-    @Column(name = "modelYili")
     private Integer modelYear;
 
 }

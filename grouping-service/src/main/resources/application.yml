@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/car_registry?autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/grouping_service?autoReconnect=true&useSSL=false
     username: root
     password: ubo361.
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,3 +12,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+server:
+  port: 8081
