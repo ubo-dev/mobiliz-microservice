@@ -1,24 +1,19 @@
 package com.ubo.groupingservice.controller;
 
-import com.ubo.groupingservice.config.WebClientConfig;
 import com.ubo.groupingservice.dto.CourierRequest;
 import com.ubo.groupingservice.dto.GroupRequest;
 import com.ubo.groupingservice.dto.GroupResponse;
 import com.ubo.groupingservice.exception.GroupNotFoundException;
 import com.ubo.groupingservice.model.entity.CarRegistry;
 import com.ubo.groupingservice.service.GroupService;
+import com.ubo.groupingservice.service.RegistryService;
 import com.ubo.groupingservice.util.ResponseHandler;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+
 
 import java.util.List;;
 
@@ -30,7 +25,7 @@ public class GroupController {
 
     private final GroupService groupService;
 
-    private final WebClientConfig webClient;
+    private final RegistryService registryService;
 
 
     @GetMapping("/getAll")
@@ -58,16 +53,9 @@ public class GroupController {
     @GetMapping("/getRegistriesById/{id}")
     public ResponseEntity<Object> getRegistriesById(@PathVariable Integer id) {
 
-        CarRegistry registryMono =  webClient.webClient()
-                .get().uri(uriBuilder ->
-                        uriBuilder.pathSegment("registries", "{id}").build(id))
-                .retrieve()
-                .bodyToMono(CarRegistry.class)
-                .doOnError(error -> log.error("There is an error while sending request {}", error.getMessage()))
-                .onErrorResume(error -> Mono.just(new CarRegistry()))
-                .block();
+        CarRegistry registry = registryService.getRegistryById(id);
 
-        return ResponseHandler.generateResponse("Car registry",HttpStatus.OK,registryMono);
+        return ResponseHandler.generateResponse("Car registry",HttpStatus.OK,registry);
     }
 
 

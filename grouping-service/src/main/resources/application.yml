@@ -12,6 +12,18 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  application:
+    name: registry-service
 
 server:
   port: 8081
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-server:8761/eureka

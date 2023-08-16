@@ -15,11 +15,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/registries")
 public class CarRegistryController {
 
     private final CarRegistryService carRegistryService;
 
-    @GetMapping("/registries")
+    @GetMapping("/getAllRegistries")
     public ResponseEntity<Object> getAllRegistries() {
         try {
             List<CarRegistryResponse> registries = carRegistryService.getAllCarRegistry();
@@ -30,7 +31,7 @@ public class CarRegistryController {
         }
     }
 
-    @GetMapping("/registries/{id}")
+    @GetMapping("/getRegistryById/{id}")
     public ResponseEntity<Object> getRegistryById(@PathVariable Integer id){
         try {
             CarRegistry registry = carRegistryService.getCarRegistryById(id);
@@ -41,7 +42,7 @@ public class CarRegistryController {
         }
     }
 
-    @PostMapping("/registries")
+    @PostMapping("/createRegistry")
     public ResponseEntity<Object> createCarRegistry(@RequestBody CarRegistryRequest carRegistryRequest) {
         try {
             carRegistryService.createCarRegistry(carRegistryRequest);
@@ -52,7 +53,7 @@ public class CarRegistryController {
         }
     }
 
-    @PutMapping("/registries")
+    @PutMapping("/updateRegistry")
     public ResponseEntity<Object> updateCarRegistry(@RequestBody CarRegistryRequest carRegistryRequest) {
         try {
             carRegistryService.createCarRegistry(carRegistryRequest);
@@ -63,9 +64,4 @@ public class CarRegistryController {
         }
     }
 
-
-    @GetMapping("/registriesReg/{id}")
-    public CarRegistry getRegistryByIdRegular(@PathVariable Integer id){
-        return carRegistryService.getCarRegistryById(id);
-    }
 }
